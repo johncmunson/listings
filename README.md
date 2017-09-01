@@ -4,4 +4,4 @@ Instructions:
 
 2. Open two separate terminals
 
-3. Run `npm start` from the `ui` and `api` directories
+3. Run `npm install` and `npm start` from the `ui` and `api` directories
