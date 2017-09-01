@@ -1,21 +1,40 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import Search from './Search.js'
+import Listings from './Listings.js'
+import NoListings from './NoListings.js'
+import axios from 'axios'
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    constructor(props) {
+        super(props)
+        this.state = {
+            agent: null,
+            listings: null
+        }
+    }
+
+    handleChange = (event) => {
+        this.setState({agent: event.target.value})
+    }
+
+    fetchListings = (event) => {
+        event.preventDefault()
+        axios({
+            method: 'get',
+            url: `/api/listings?agent=${this.state.agent}`
+        })
+        .then(res => this.setState({
+            listings: res.data
+        }))
+    }
+    render() {
+        return (
+            <div>
+                <Search onSubmit={this.fetchListings} value={this.state.value} onChange={this.handleChange} />
+                {this.state.listings ? <Listings listings={this.state.listings} /> : <NoListings />}
+            </div>
+        )
+    }
 }
 
-export default App;
+export default App

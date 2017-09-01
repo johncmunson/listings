@@ -1,0 +1,10 @@
+- app architecture
+- listing component
+- listings component
+- listings.connected component
+- image urls
+- store
+- reducers
+- actions
+- hosting
+- readme
